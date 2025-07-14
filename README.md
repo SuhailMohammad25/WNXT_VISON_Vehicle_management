@@ -1,114 +1,139 @@
-# Salesforce DX Project: Next Steps
+# 🚗 Complete Vehicle Management System (Salesforce Implementation)
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A comprehensive Salesforce-based application designed to manage vehicle inventories, dealers, customers, orders, test drives, and service requests. This system streamlines automotive business operations through automation, Apex logic, and real-time dashboards.
 
-## How Do You Plan to Deploy Your Changes?🚗 Complete Vehicle Management System (Salesforce Implementation)
-A comprehensive and scalable Salesforce-based application designed to manage vehicle inventories, dealers, customers, orders, test drives, and service requests. This system streamlines the operations of an automotive business with automation, Apex logic, and real-time dashboards.
+---
 
-🔧 Features
-Custom Objects for Vehicles, Dealers, Customers, Orders, Test Drives, and Service Requests
+## 🔧 Features
 
-Field-Level Customization with lookups, picklists, auto-numbers, and validations
+- Custom Objects for Vehicles, Dealers, Customers, Orders, Test Drives, and Service Requests  
+- Field-level customization with lookups, picklists, auto-numbers, and validations  
+- Lightning App Experience with navigation tabs  
+- Record-Triggered Flows:
+  - Auto-assign dealers based on customer location
+  - Send scheduled test drive reminder emails  
+- Apex Trigger & Handler for:
+  - Preventing orders for out-of-stock vehicles
+  - Updating stock on order confirmation  
+- Batch Apex and Scheduler for processing pending orders  
+- Real-time Reports and Dashboards for operational visibility
 
-Lightning App Experience with all relevant tabs, reports, and dashboards
+---
 
-Record-Triggered Flows for:
+## 📦 Objects Overview
 
-Auto-assigning dealers based on customer address
+| Object                   | Key Fields                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **Vehicle**              | Model, Price, Stock Quantity, Status, Dealer (Lookup)                      |
+| **Vehicle Dealer**       | Location, Dealer Code (Auto), Phone, Email                                 |
+| **Vehicle Customer**     | Email, Phone, Address, Preferred Vehicle Type                              |
+| **Vehicle Order**        | Auto-number, Customer (Lookup), Vehicle (Lookup), Order Date, Status       |
+| **Vehicle Test Drive**   | Auto-number, Customer (Lookup), Vehicle (Lookup), Test Drive Date, Status  |
+| **Service Request**      | Auto-number, Customer (Lookup), Vehicle (Lookup), Issue Description, Status|
 
-Sending test drive reminders via email
+---
 
-Apex Trigger & Handler for stock validation and real-time stock updates
+## ⚙️ Setup Instructions
 
-Scheduled Batch Job for processing pending orders and updating inventory
+1. **Create Custom Objects**
+   - Vehicle, Vehicle Dealer, Vehicle Customer, Vehicle Order, Vehicle Test Drive, Service Request
 
-Reports & Dashboards for real-time insights into stock levels and order status
+2. **Create Fields & Relationships**
+   - Lookup relationships
+   - Picklists (Vehicle Model, Order Status, etc.)
+   - Auto Number fields for identifiers
+   - Currency, Number, and Text Area fields
 
-📦 Objects Overview
-Object	Key Fields
-Vehicle	Model, Price, Stock Quantity, Status, Dealer (Lookup)
-Vehicle Dealer	Location, Dealer Code (Auto), Phone, Email
-Vehicle Customer	Email, Phone, Address, Preferred Vehicle Type
-Vehicle Order	Auto-number ID, Customer (Lookup), Vehicle (Lookup), Order Date, Status
-Vehicle Test Drive	Auto-number ID, Customer, Vehicle, Test Drive Date, Status
-Service Request	Auto-number ID, Customer, Vehicle, Service Date, Issue Description, Status
+3. **Create Custom Tabs**
+   - For all custom objects
 
-⚙️ Setup Instructions
-Create Custom Objects for each entity (Vehicle, Dealer, etc.)
+4. **Create Lightning App**
+   - Name: *WhatNext Vision Motors*
+   - Include: All object tabs, Reports, Dashboards
 
-Add Fields and Relationships based on business logic
+5. **Build Flows**
+   - `Auto Assign Dealer`: Assign nearest dealer on order creation
+   - `Test Drive Reminder`: Send email one day before scheduled test drive
 
-Create Custom Tabs for all objects
+6. **Create Apex Components**
+   - `VehicleOrderTriggerHandler` class
+   - `VehicleOrderTrigger` trigger
+   - `VehicleOrderBatch` class
+   - `VehicleOrderBatchScheduler` class
 
-Build Lightning App named WhatNext Vision Motors
+7. **Schedule Batch Job**
+   - Runs daily at midnight to confirm pending orders and update stock
 
-Create Flows:
+8. **Create Reports & Dashboards**
+   - Vehicle Stock Report
+   - Order Status Report
+   - Vehicle Management Dashboard
 
-Auto-dealer assignment on order creation
+---
 
-Test drive reminder email one day before
+## 🔁 Automation Logic
 
-Develop Apex Components:
+- **Dealer Auto-Assignment**  
+  Automatically assigns dealer based on customer's address in the order flow
 
-VehicleOrderTriggerHandler class
+- **Stock Validation**  
+  Prevents order placement if the vehicle is out of stock (Apex Trigger)
 
-VehicleOrderTrigger trigger
+- **Stock Update**  
+  On order confirmation, vehicle stock quantity is decremented (Apex Logic)
 
-VehicleOrderBatch and VehicleOrderBatchScheduler classes
+- **Test Drive Reminder**  
+  Sends an automated email reminder one day before the scheduled test drive (Flow)
 
-Schedule Batch Jobs to run nightly
+- **Batch Order Processing**  
+  Batch job confirms all pending orders and adjusts vehicle inventory
 
-Create Reports & Dashboards for admin visibility
+---
 
-🔁 Automation Logic
-Dealer Auto-Assignment: Matches customer address with nearest dealer
+## 📊 Reports & Dashboards
 
-Stock Validation: Prevents order if vehicle stock = 0
+- **Vehicle Stock Report**  
+  Displays Vehicle Name, Stock Quantity, and Status
 
-Stock Decrement: Automatically reduces stock count on order confirmation
+- **Order Status Report**  
+  Displays Order Number, Customer, Vehicle, Order Date, and Status
 
-Test Drive Reminder: Email sent 1 day before scheduled test drive
+- **Vehicle Management Dashboard**  
+  Consolidated visualization of key metrics using above reports
 
-Batch Processing: Confirms pending orders and updates inventory
+---
 
-📊 Reports & Dashboards
-Vehicle Stock Report: Displays vehicle name, quantity, and availability
+## 🛡 Security & Best Practices
 
-Order Status Report: Monitors customer orders and current status
+- Role-based and field-level security configured
+- Optimized page layouts for usability
+- Batch job sizes are performance-optimized
+- Clean separation of business logic in Apex
 
-Vehicle Management Dashboard: Visual summary of stock and sales activities
+---
 
-🛡 Security & Best Practices
-Role-based access and field-level security applied
+## 🌱 Future Enhancements
 
-Page layouts customized for usability
+- Integration with external CRM/ERP systems
+- Mobile app for customers and sales teams
+- Customer self-service portal
+- AI-driven recommendations and service insights
 
-Batch jobs monitored and optimized for performance
+---
 
-🌱 Future Enhancements
-External system integration (CRM/ERP)
+## ✅ Project Status
 
-Mobile accessibility
+**✔️ Completed and Fully Functional**
 
-AI-based service recommendations
+- All components configured, tested, and deployed
+- Aligned with Salesforce best practices
+- Ready for demo, training, or deployment
 
-Customer self-service portal
+---
 
-✅ Project Status: Completed
-All modules and components have been fully implemented, tested, and deployed as per the Salesforce best practices.
+## 👨‍💻 Author & Credits
 
-🧠 Author & Credits
-Developed as part of a comprehensive Salesforce training and implementation initiative. Contributions and feedback are welcome!
+Developed as part of a Salesforce project initiative. Contributions and improvements are welcome.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+---
 
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
